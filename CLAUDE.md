@@ -13,12 +13,13 @@ A math-focused homeschool course for a 13.5-year-old boy, covering June 2026 (ap
 - **Interleaved subjects:** rotate between math, CS, physics, and bio/chem week to week. Do NOT block-schedule one subject for many weeks. Progress within each domain is real but not labeled as such.
 - **Incremental content creation:** build content week by week, not all at once. The learning plan is the master document; individual week/day slides come later.
 - **13.5-year-old tone:** curious and direct. No condescension. Treat him as a junior scientist. Puzzles before explanations.
+- **Resource-limited:** physical activities should be optional, not required. Core lessons work on screen.
 
-## Repo structure (planned — in progress)
+## Repo structure
 ```
 tochtlis-courses/
 ├── CLAUDE.md                  # this file
-├── learning_plan.md           # master course outline (32 weeks, 4 phases)
+├── learning_plan.md           # master course outline (4 weeks, math-through-phenomena)
 ├── content/                   # Hugo content (markdown)
 │   └── course/
 │       ├── _index.md
@@ -27,21 +28,27 @@ tochtlis-courses/
 │       │   └── june/
 │       │       ├── _index.md
 │       │       ├── week1/
-│       │       │   ├── _index.md
-│       │       │   ├── day01.md   # Marp slide source
-│       │       │   └── ...
+│       │       │   ├── _index.md        # lists slide links using {{< slide >}} shortcode
+│       │       │   ├── .day01.md        # Marp slide source (dot prefix — Hugo ignores it)
+│       │       │   ├── .day02.md
+│       │       │   └── .day03.md
 │       │       └── ...
 │       └── ...
-├── static/                    # Hugo static files
-│   └── slides/                # Marp-generated HTML (gitignored or generated in CI)
-├── hugo.toml                  # Hugo config
+├── static/
+│   └── slides/                # Marp-compiled HTML (committed, also built in CI)
 ├── themes/
-│   └── PaperMod/              # git submodule
-├── .github/
-│   └── workflows/
-│       └── hugo.yml           # CI/CD to GitHub Pages
-├── Taskfile.yml               # task automation (marp build, hugo serve, etc.)
-└── package.json               # node deps (Tailwind CSS)
+│   ├── PaperMod/              # git submodule
+│   └── marp/
+│       └── dracula.css        # Dracula theme for Marp slides
+├── layouts/
+│   └── shortcodes/
+│       └── slide.html         # shortcode: prepends baseURL to slide links
+├── hugo.toml                  # Hugo config
+├── Taskfile.yml               # task automation
+├── package.json               # node deps (@marp-team/marp-cli)
+└── .github/
+    └── workflows/
+        └── hugo.yml           # CI/CD: builds Marp slides then Hugo, deploys to Pages
 ```
 
 ## Content file conventions
@@ -55,7 +62,7 @@ header: "← [Week N: Title](../../../../course/2026/june/weekN/)"
 ---
 ```
 
-The header link uses a relative path (`../../../../course/...`) because slides are served from `/slides/2026/june/weekN/` and an absolute path would miss the `/tochtlis-courses/` baseURL prefix.
+The header link uses a relative path (`../../../../course/...`) because slides are served from `/slides/2026/june/weekN/` — an absolute path would miss the `/tochtlis-courses/` baseURL prefix.
 
 Week index files (`weekN/_index.md`) link to compiled slide HTML using the `slide` shortcode:
 ```markdown
@@ -66,37 +73,64 @@ weight: N
 - {{< slide "2026/june/weekN/day01.html" "Day 1: [Phenomenon]" >}}
 ```
 
+The `slide` shortcode prepends `{{ .Site.BaseURL }}` to fix the same baseURL issue for Hugo-rendered links.
+
+**All URLs in hugo.toml (menus, buttons) must be relative (no leading slash)** — e.g. `course/` not `/course/` — otherwise the `/tochtlis-courses/` subpath is dropped.
+
+## Marp build
+Slides are compiled by `@marp-team/marp-cli` using the Dracula theme. The build script:
+```bash
+find content/course -name ".day*.md" | while IFS= read -r f; do
+  rel="${f#content/course/}"
+  dir="static/slides/$(dirname "$rel")"
+  mkdir -p "$dir"
+  outname=$(basename "$f" .md | sed 's/^\.//').html
+  npx @marp-team/marp-cli --html --theme themes/marp/dracula.css --output "$dir/$outname" "$f" </dev/null
+done
+```
+
+**Important:** `</dev/null` is required. Without it, marp-cli reads the remaining filenames from the find pipe and errors on multiple inputs.
+
+Run locally with: `task marp-build`
+
 ## Hugo setup
-- **Theme:** PaperMod (git submodule at `themes/PaperMod/`)
-- **Base URL:** will be GitHub Pages — `https://whlapinel.github.io/tochtlis-courses` (confirm before first deploy)
-- **Key config:** `markup.goldmark.renderer.unsafe = true` for embedded HTML in markdown
-- **Reference config:** `../personal_projects/portfolio_hugo/portfolio/hugo.toml`
+- **Theme:** PaperMod (git submodule), profile mode enabled (no recent posts on home page)
+- **Base URL:** `https://whlapinel.github.io/tochtlis-courses/`
+- **Key config:** `markup.goldmark.renderer.unsafe = true` for inline SVG and HTML in slides
+- Hugo version: 0.161.1 extended (installed at `/usr/local/bin/hugo` or `~/.local/bin/hugo`)
+
+## Diagrams
+Inline SVG is used for geometric diagrams directly in Marp slides. Math renders as SVG automatically via Marp's built-in MathJax — no external scripts needed. Use `$$...$$` for display math, `$...$` for inline.
+
+Open question: a Python SVG generator script would reduce token cost for future diagrams.
 
 ## CI/CD
 - GitHub Actions deploys to GitHub Pages on push to `main`
-- Reference workflow: `../personal_projects/portfolio_hugo/portfolio/.github/workflows/hugo.yml`
-- Hugo version used in that workflow: `0.146.0` (use same)
-- Marp HTML generation: either pre-built and committed to `static/slides/`, or generated in CI before Hugo build
+- Workflow: builds Marp slides first, then runs Hugo
+- Repo is public; GitHub Pages is enabled (Source: GitHub Actions)
+- Live site: `https://whlapinel.github.io/tochtlis-courses/`
 
-## Key reference repos (on this machine)
-- `../mob_learning/secure-comms/` — content structure model (phase → week → day, Marp slides)
-- `../personal_projects/portfolio_hugo/portfolio/` — Hugo config, GitHub Actions, Taskfile, PaperMod theme
+## Reference repo
+- `../whlapinel.github.io` — portfolio Hugo site; reference for hugo.toml, PaperMod config, GitHub Actions workflow
 
 ## What has been done
-- [x] Repo initialized at `https://github.com/whlapinel/tochtlis-courses`
+- [x] Repo initialized and public at `https://github.com/whlapinel/tochtlis-courses`
 - [x] `learning_plan.md` written (June 2026, 4 weeks, math-through-phenomena)
-- [ ] Hugo site scaffold (hugo.toml, theme submodule, layouts)
-- [ ] GitHub Actions workflow
-- [ ] Taskfile (marp build + hugo serve tasks)
-- [ ] First week of content (Week 1: shadows & similar triangles)
+- [x] Hugo site scaffold (hugo.toml, PaperMod submodule, profile mode home page)
+- [x] GitHub Actions workflow (Marp build + Hugo deploy)
+- [x] Taskfile (`marp-build`, `serve`, `build`, `update-theme`)
+- [x] Dracula Marp theme (`themes/marp/dracula.css`)
+- [x] `slide` shortcode for correct baseURL-aware links
+- [x] Week 1 all 3 days (shadows & similar triangles)
+- [x] GitHub Pages live
 
 ## What to do next (when resuming)
-1. Scaffold the Hugo site: `hugo new site . --force`, add PaperMod submodule, write `hugo.toml`
-2. Copy `.github/workflows/hugo.yml` from portfolio, adjust `baseURL`
-3. Write `Taskfile.yml` with `marp-build` and `serve` tasks
-4. Start Phase 1 Week 1 content (`content/course/phase1/week1/`)
+1. Add SVG diagram to Day 3 ("See it" slide — ruler trick / similar triangles)
+2. Draft Week 2 content (slope & falling things — coordinate plane, rise/run, linear functions)
+3. Consider writing a Python SVG generator script for reusable diagram types
 
-## Working style preferences (captured from session)
-- Be incremental — draft first, write files only after approval
-- Don't generate entire phases of content at once; do one week at a time
-- CLAUDE.md is the source of truth for future sessions on other machines
+## Working style preferences
+- Draft first, write files only after approval
+- One week of content at a time
+- No Co-Authored-By trailers in commit messages
+- CLAUDE.md is the source of truth for future sessions
