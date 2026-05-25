@@ -1,12 +1,12 @@
 # CLAUDE.md — tochtlis-courses
 
 ## What this repo is
-A STEM homeschool course for a 13.5-year-old boy, spanning the remainder of calendar year 2026 (May–December). The repo contains both the course content (Marp slides, markdown) and the Hugo site that publishes it.
+A math-focused homeschool course for a 13.5-year-old boy, covering June 2026 (approximately 4 weeks, 3 sessions/week). Every session is anchored in a real-world phenomenon; the math emerges from trying to describe or predict it. The repo contains both the course content (Marp slides, markdown) and the Hugo site that publishes it.
 
 ## Student profile
 - Age: 13.5, homeschooled
 - Coding level: some experience (Python basics / simple programs, no data structures yet)
-- Subjects: all four — Math, CS, Physics/Engineering, Biology/Chemistry
+- This month's focus: math-heavy (7th/8th grade coverage), anchored in real-world phenomena
 
 ## Course design philosophy
 - **Phenomenon-first:** every session opens with a puzzling, counterintuitive question. Never "today we study X" — always "here is something weird; let's figure out why."
@@ -80,11 +80,11 @@ weight: N
 
 ## What has been done
 - [x] Repo initialized at `https://github.com/whlapinel/tochtlis-courses`
-- [x] `learning_plan.md` written (32 weeks, 4 phases, phenomenon-anchored)
+- [x] `learning_plan.md` written (June 2026, 4 weeks, math-through-phenomena)
 - [ ] Hugo site scaffold (hugo.toml, theme submodule, layouts)
 - [ ] GitHub Actions workflow
 - [ ] Taskfile (marp build + hugo serve tasks)
-- [ ] First week of content (Phase 1, Week 1: snowflakes)
+- [ ] First week of content (Week 1: shadows & similar triangles)
 
 ## What to do next (when resuming)
 1. Scaffold the Hugo site: `hugo new site . --force`, add PaperMod submodule, write `hugo.toml`
