@@ -42,12 +42,12 @@ jobs:
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Build Marp slides
         run: |
-          find content/course -name ".day*.md" | while read f; do
+          find content/course -name ".day*.md" | while IFS= read -r f; do
             rel="${f#content/course/}"
             dir="static/slides/$(dirname "$rel")"
             mkdir -p "$dir"
             outname=$(basename "$f" .md | sed 's/^\.//').html
-            npx @marp-team/marp-cli "$f" --html --theme themes/marp/dracula.css -o "$dir/$outname"
+            npx @marp-team/marp-cli --html --theme themes/marp/dracula.css --output "$dir/$outname" "$f" </dev/null
           done
       - name: Build with Hugo
         env:

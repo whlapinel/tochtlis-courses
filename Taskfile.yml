@@ -22,12 +22,12 @@ tasks:
     desc: Compile all Marp slide sources to HTML in static/slides/
     cmds:
       - |
-        find content/course -name ".day*.md" | while read f; do
+        find content/course -name ".day*.md" | while IFS= read -r f; do
           rel="${f#content/course/}"
           dir="static/slides/$(dirname "$rel")"
           mkdir -p "$dir"
           outname=$(basename "$f" .md | sed 's/^\.//').html
-          npx @marp-team/marp-cli "$f" --html --theme themes/marp/dracula.css -o "$dir/$outname"
+          npx @marp-team/marp-cli --html --theme themes/marp/dracula.css --output "$dir/$outname" "$f" </dev/null
         done
 
   update-theme:
