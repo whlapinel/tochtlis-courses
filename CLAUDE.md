@@ -22,13 +22,15 @@ tochtlis-courses/
 ├── content/                   # Hugo content (markdown)
 │   └── course/
 │       ├── _index.md
-│       ├── phase1/
+│       ├── 2026/
 │       │   ├── _index.md
-│       │   ├── week1/
-│       │   │   ├── _index.md
-│       │   │   ├── day01.md   # Marp slide source
-│       │   │   └── ...
-│       │   └── ...
+│       │   └── june/
+│       │       ├── _index.md
+│       │       ├── week1/
+│       │       │   ├── _index.md
+│       │       │   ├── day01.md   # Marp slide source
+│       │       │   └── ...
+│       │       └── ...
 │       └── ...
 ├── static/                    # Hugo static files
 │   └── slides/                # Marp-generated HTML (gitignored or generated in CI)
@@ -56,10 +58,10 @@ header: "← [Week N: Title](/course/phaseN/weekN/)"
 Week index files (`weekN/_index.md`) list links to the day slide HTML files:
 ```markdown
 ---
-title: "Phase N Week N: [Title]"
+title: "Week N: [Title]"
 weight: N
 ---
-- [Day 1: [Phenomenon]](/slides/phaseN/weekN/day01.html)
+- [Day 1: [Phenomenon]](/slides/2026/june/weekN/day01.html)
 ```
 
 ## Hugo setup

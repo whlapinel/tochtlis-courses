@@ -1,0 +1,25 @@
+baseURL = 'https://whlapinel.github.io/tochtlis-courses/'
+locale = 'en-us'
+title = 'Math Through the Real World'
+theme = 'PaperMod'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+    [markup.goldmark.renderer]
+      unsafe = true
+
+sectionPagesMenu = 'main'
+
+[[menu.main]]
+identifier = "course"
+name = "Course"
+url = "/course/"
+weight = 10
+
+[params]
+ShowBreadCrumbs = true
+ShowPostNavLinks = true

@@ -1,0 +1,35 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  serve:
+    desc: Run Hugo dev server with drafts
+    cmds:
+      - hugo server --buildDrafts
+
+  build:
+    desc: Build Hugo site to ./public
+    cmds:
+      - hugo --minify
+
+  marp-build:
+    desc: Compile all Marp slide sources to HTML in static/slides/
+    cmds:
+      - |
+        find content/course -name "day*.md" | while read f; do
+          rel="${f#content/course/}"
+          dir="static/slides/$(dirname "$rel")"
+          mkdir -p "$dir"
+          npx @marp-team/marp-cli "$f" --html -o "$dir/$(basename "${f%.md}.html")"
+        done
+
+  update-theme:
+    desc: Pull latest PaperMod theme
+    cmds:
+      - git submodule update --remote --merge
