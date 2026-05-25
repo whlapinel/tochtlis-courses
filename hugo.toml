@@ -17,7 +17,7 @@ sectionPagesMenu = 'main'
 [[menu.main]]
 identifier = "course"
 name = "Course"
-url = "/course/"
+url = "course/"
 weight = 10
 
 [params]
@@ -31,4 +31,4 @@ subtitle = "A hands-on math course for a curious 13-year-old. Every session star
 
 [[params.profileMode.buttons]]
 name = "Start Learning"
-url = "/course/"
+url = "course/"
