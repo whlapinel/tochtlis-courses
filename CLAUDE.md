@@ -45,23 +45,25 @@ tochtlis-courses/
 ```
 
 ## Content file conventions
-Marp slide source files (`dayNN.md`) use this frontmatter:
+Marp slide source files are named `.dayNN.md` (dot prefix) so Hugo ignores them as content pages. Use this frontmatter:
 ```yaml
 ---
 marp: true
-theme: default
+theme: dracula
 paginate: true
-header: "← [Week N: Title](/course/phaseN/weekN/)"
+header: "← [Week N: Title](../../../../course/2026/june/weekN/)"
 ---
 ```
 
-Week index files (`weekN/_index.md`) list links to the day slide HTML files:
+The header link uses a relative path (`../../../../course/...`) because slides are served from `/slides/2026/june/weekN/` and an absolute path would miss the `/tochtlis-courses/` baseURL prefix.
+
+Week index files (`weekN/_index.md`) link to compiled slide HTML using the `slide` shortcode:
 ```markdown
 ---
 title: "Week N: [Title]"
 weight: N
 ---
-- [Day 1: [Phenomenon]](/slides/2026/june/weekN/day01.html)
+- {{< slide "2026/june/weekN/day01.html" "Day 1: [Phenomenon]" >}}
 ```
 
 ## Hugo setup
