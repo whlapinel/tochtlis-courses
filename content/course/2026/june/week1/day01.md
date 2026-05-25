@@ -25,6 +25,12 @@ Does that give you enough to find the pole's height?
 
 ---
 
+## See it
+
+<iframe src="https://www.geogebra.org/geometry/hrwmpjzj?embed" width="760" height="500" allowfullscreen style="border: 1px solid #44475a; border-radius: 4px;" frameborder="0"></iframe>
+
+---
+
 ## The key insight
 
 Because the sun angle is the same for everything at the same moment:
