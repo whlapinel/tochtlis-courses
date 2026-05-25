@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: default
+theme: dracula
 paginate: true
 header: "← [Week 1: Shadows & Similar Triangles](/course/2026/june/week1/)"
 ---
