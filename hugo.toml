@@ -23,3 +23,12 @@ weight = 10
 [params]
 ShowBreadCrumbs = true
 ShowPostNavLinks = true
+
+[params.profileMode]
+enabled = true
+title = "Math Through the Real World"
+subtitle = "A hands-on math course for a curious 13-year-old. Every session starts with something weird — then we figure out why."
+
+[[params.profileMode.buttons]]
+name = "Start Learning"
+url = "/course/"
