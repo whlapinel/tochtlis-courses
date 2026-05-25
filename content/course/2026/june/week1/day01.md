@@ -2,7 +2,7 @@
 marp: true
 theme: dracula
 paginate: true
-header: "← [Week 1: Shadows & Similar Triangles](/course/2026/june/week1/)"
+header: "← [Week 1: Shadows & Similar Triangles](../../../../course/2026/june/week1/)"
 ---
 
 # A telephone pole casts a 20-foot shadow.
