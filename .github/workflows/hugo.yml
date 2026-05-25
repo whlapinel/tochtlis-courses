@@ -40,6 +40,14 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Build Marp slides
+        run: |
+          find content/course -name "day*.md" | while read f; do
+            rel="${f#content/course/}"
+            dir="static/slides/$(dirname "$rel")"
+            mkdir -p "$dir"
+            npx @marp-team/marp-cli "$f" --html -o "$dir/$(basename "${f%.md}.html")"
+          done
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
