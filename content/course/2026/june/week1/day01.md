@@ -27,7 +27,36 @@ Does that give you enough to find the pole's height?
 
 ## See it
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400"><defs/><g transform="scale(2,2)"><g id="background-b868b639"><rect fill="white" stroke="none" x="0" y="0" width="400" height="400" class="dcg-svg-background"/></g><g id="graphpaper-b868b639"><g id="axis-b868b639"><g><g><path fill="none" stroke="rgb(0,0,0)" class="dcg-svg-tickmark" paint-order="fill stroke markers" d="" stroke-opacity="0.9" stroke-miterlimit="2" stroke-width="1.5" stroke-dasharray=""/></g></g></g></g><g id="expressions-b868b639"><g id="sketch-b868b639"><title>Expression 1</title><path fill="#348543" stroke="none" paint-order="stroke fill markers" d="" fill-opacity="0.4"/><g><path fill="none" stroke="#348543" class="dcg-svg-curve" paint-order="fill stroke markers" d=" M 259.2617495098537 172.5832895359523 A 78.95582069930423 78.95582069930421 0 1 1 259.2617100319466 172.50433372841226" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5" stroke-dasharray=""/></g></g><g id="sketch-b868b639"><title>Expression 1</title></g><g id="sketch-b868b639"><title>Expression 1</title></g></g><g id="labels-b868b639"/><path fill="#6042a6" stroke="none" class="dcg-svg-point" paint-order="stroke fill markers" d=" M 184.30592881054946 172.5832895359523 A 4 4 0 1 1 184.30592681054964 172.57928953661897 Z"/><path fill="#6042a6" stroke="none" class="dcg-svg-point" paint-order="stroke fill markers" d=" M 237.92754250378678 230.5379629215724 A 4 4 0 1 1 237.92754050378696 230.53396292223906 Z"/><g id="labels-b868b639"/></g></svg>
+<svg width="660" height="310" xmlns="http://www.w3.org/2000/svg" style="font-family: 'IBM Plex Sans', sans-serif;">
+  <!-- Ground -->
+  <line x1="20" y1="280" x2="640" y2="280" stroke="#6272a4" stroke-width="2"/>
+  <!-- Sun -->
+  <circle cx="28" cy="168" r="13" fill="#f1fa8c"/>
+  <text x="28" y="152" font-size="10" fill="#f1fa8c" text-anchor="middle">sun</text>
+  <!-- Sun rays (parallel, dashed) -->
+  <line x1="40" y1="180" x2="120" y2="280" stroke="#f1fa8c" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.9"/>
+  <line x1="360" y1="30" x2="560" y2="280" stroke="#f1fa8c" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.9"/>
+  <!-- Person triangle (cyan) -->
+  <polygon points="80,230 80,280 120,280" fill="#8be9fd" fill-opacity="0.15" stroke="#8be9fd" stroke-width="2"/>
+  <!-- Person head -->
+  <circle cx="80" cy="225" r="5" fill="#8be9fd"/>
+  <!-- Right angle - person -->
+  <polyline points="80,269 91,269 91,280" fill="none" stroke="#6272a4" stroke-width="1.5"/>
+  <!-- Angle θ at person shadow tip -->
+  <text x="107" y="274" font-size="13" fill="#ff79c6">θ</text>
+  <!-- Labels person -->
+  <text x="62" y="259" font-size="13" fill="#8be9fd" text-anchor="middle">5 ft</text>
+  <text x="100" y="296" font-size="13" fill="#ffb86c" text-anchor="middle">4 ft</text>
+  <!-- Pole triangle (green) -->
+  <polygon points="360,30 360,280 560,280" fill="#50fa7b" fill-opacity="0.15" stroke="#50fa7b" stroke-width="2"/>
+  <!-- Right angle - pole -->
+  <polyline points="360,269 371,269 371,280" fill="none" stroke="#6272a4" stroke-width="1.5"/>
+  <!-- Angle θ at pole shadow tip -->
+  <text x="547" y="274" font-size="13" fill="#ff79c6">θ</text>
+  <!-- Labels pole -->
+  <text x="352" y="158" font-size="13" fill="#50fa7b" text-anchor="end">? ft</text>
+  <text x="460" y="296" font-size="13" fill="#ffb86c" text-anchor="middle">20 ft</text>
+</svg>
 
 ---
 
