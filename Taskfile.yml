@@ -30,6 +30,21 @@ tasks:
           npx @marp-team/marp-cli --html --theme themes/marp/dracula.css --output "$dir/$outname" "$f" </dev/null
         done
 
+  deploy:
+    desc: Build Marp + Hugo, push to S3, then sync to EC2 via SSM
+    dotenv: [".env.dev"]
+    cmds:
+      - task: marp-build
+      - hugo --minify --baseURL https://tochtli.lapinel-fam.club/
+      - aws s3 sync public/ s3://lapinel-home-server-backup/tochtli-site/ --delete --profile $AWS_PROFILE
+      - |
+        aws ssm send-command \
+          --profile $AWS_PROFILE \
+          --instance-id $INSTANCE_ID \
+          --document-name "AWS-RunShellScript" \
+          --parameters 'commands=["aws s3 sync s3://lapinel-home-server-backup/tochtli-site/ /opt/tochtli-site/ --delete"]' \
+          --output text
+
   update-theme:
     desc: Pull latest PaperMod theme
     cmds:
