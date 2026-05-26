@@ -224,3 +224,6 @@ resources/_gen/
 
 # Node
 node_modules/
+
+# Local env
+.env.dev
