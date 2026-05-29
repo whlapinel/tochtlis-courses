@@ -1,0 +1,25 @@
+{{ $id := .Get "id" }}
+{{ $answer := .Get "answer" }}
+{{ $tolerance := .Get "tolerance" | default "0.02" }}
+{{ $hint := .Get "hint" }}
+{{ $solution := .Get "solution" }}
+{{ $unit := .Get "unit" | default "" }}
+
+<div class="problem" id="{{ $id }}" data-answer="{{ $answer }}" data-tolerance="{{ $tolerance }}">
+  <div class="problem-text">
+    {{ .Inner | markdownify }}
+  </div>
+  <div class="problem-input">
+    <input type="number" step="any" placeholder="Your answer{{ if $unit }} ({{ $unit }}){{ end }}">
+    {{ if $unit }}<span class="problem-unit">{{ $unit }}</span>{{ end }}
+    <button class="check-btn">Check</button>
+  </div>
+  <div class="feedback" hidden></div>
+  {{ if $hint }}
+  <div class="hint" hidden><strong>Hint:</strong> {{ $hint }}</div>
+  {{ end }}
+  {{ if $solution }}
+  <div class="solution" hidden><strong>Solution:</strong> {{ $solution }}</div>
+  <button class="show-solution-btn" hidden>Show solution</button>
+  {{ end }}
+</div>

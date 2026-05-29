@@ -1,0 +1,4 @@
+{{ if eq .Type "practice" }}
+<meta name="course-id" content="{{ .Site.Params.courseId }}">
+<script src="{{ "js/practice.js" | relURL }}"></script>
+{{ end }}

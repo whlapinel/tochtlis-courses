@@ -36,6 +36,7 @@ tasks:
     cmds:
       - task: marp-build
       - hugo --minify --baseURL https://tochtli.lapinel-fam.club/
+      - set -a && source .env && set +a
       - aws s3 sync public/ s3://lapinel-home-server-backup/tochtli-site/ --delete --profile $AWS_PROFILE
       - |
         aws ssm send-command \

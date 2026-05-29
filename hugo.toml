@@ -1,6 +1,6 @@
 baseURL = 'https://tochtli.lapinel-fam.club/'
 locale = 'en-us'
-title = 'Math Through the Real World'
+title = "Tochtli's Daily Challenges"
 theme = 'PaperMod'
 
 [markup]
@@ -23,12 +23,13 @@ weight = 10
 [params]
 ShowBreadCrumbs = true
 ShowPostNavLinks = true
+courseId = "tochtli-june-2026"
 
 [params.profileMode]
 enabled = true
-title = "Math Through the Real World"
-subtitle = "A hands-on math course for a curious 13-year-old. Every session starts with something weird — then we figure out why."
+title = "Tochtli's Daily Challenges"
+subtitle = "Ok, not quite daily but almost"
 
 [[params.profileMode.buttons]]
-name = "Start Learning"
-url = "course/"
+name = "Week 1"
+url = "course/2026/june/week1/"
