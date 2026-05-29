@@ -32,11 +32,11 @@ tasks:
 
   deploy:
     desc: Build Marp + Hugo, push to S3, then sync to EC2 via SSM
-    dotenv: [".env.dev"]
+    dotenv: [".env"]
     cmds:
       - task: marp-build
       - hugo --minify --baseURL https://tochtli.lapinel-fam.club/
-      - set -a && source .env && set +a
+      - echo $AWS_PROFILE
       - aws s3 sync public/ s3://lapinel-home-server-backup/tochtli-site/ --delete --profile $AWS_PROFILE
       - |
         aws ssm send-command \
