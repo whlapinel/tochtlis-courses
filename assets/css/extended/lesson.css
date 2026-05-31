@@ -1,0 +1,119 @@
+.lesson-container {
+  position: relative;
+}
+
+.lesson-card {
+  border: 2px solid #6272a4;
+  border-radius: 14px;
+  padding: 2.5rem 3rem;
+  margin: 1rem 0;
+  background: var(--entry, #1e1e2e);
+  font-size: 1.6rem;
+  line-height: 1.8;
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lesson-card[hidden] {
+  display: none !important;
+}
+
+.card-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.card-body h2 {
+  font-size: 2rem;
+  margin-top: 0;
+  color: #bd93f9;
+}
+
+.card-body p {
+  margin: 0.6rem 0;
+}
+
+.card-body svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.tts-btn {
+  align-self: flex-start;
+  margin-top: 1.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background: #6272a4;
+  color: #f8f8f2;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tts-btn:hover {
+  background: #7b8ec8;
+}
+
+.lesson-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5rem 0 2rem;
+  gap: 1rem;
+}
+
+.nav-btn {
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  border: none;
+  background: #bd93f9;
+  color: #282a36;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: #cfa9ff;
+}
+
+.nav-btn:disabled {
+  background: #44475a;
+  color: #6272a4;
+  cursor: not-allowed;
+}
+
+.nav-counter {
+  color: var(--secondary, #aaa);
+  font-size: 1rem;
+  min-width: 5rem;
+  text-align: center;
+}
+
+/* Fullscreen */
+.lesson-container:fullscreen,
+.lesson-container:-webkit-full-screen {
+  background: var(--entry, #1e1e2e);
+  padding: 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.lesson-container:fullscreen .lesson-card,
+.lesson-container:-webkit-full-screen .lesson-card {
+  flex: 1;
+  min-height: 0;
+  margin: 1rem 0 0;
+}
+
+.lesson-container:fullscreen .lesson-nav,
+.lesson-container:-webkit-full-screen .lesson-nav {
+  flex-shrink: 0;
+}
