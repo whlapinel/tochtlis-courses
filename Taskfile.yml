@@ -43,7 +43,7 @@ tasks:
           --profile $AWS_PROFILE \
           --instance-id $INSTANCE_ID \
           --document-name "AWS-RunShellScript" \
-          --parameters 'commands=["aws s3 sync s3://lapinel-home-server-backup/tochtli-site/ /opt/tochtli-site/ --delete"]' \
+          --parameters 'commands=["aws s3 sync s3://lapinel-home-server-backup/tochtli-site/ /opt/tochtli-site/ --delete --exact-timestamps"]' \
           --output text
 
   update-theme:
