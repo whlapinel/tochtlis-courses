@@ -16,7 +16,7 @@ tasks:
   build:
     desc: Build Hugo site to ./public
     cmds:
-      - hugo --minify
+      - hugo --minify --cleanDestinationDir
 
   marp-build:
     desc: Compile all Marp slide sources to HTML in static/slides/
@@ -35,7 +35,7 @@ tasks:
     dotenv: [".env"]
     cmds:
       - task: marp-build
-      - hugo --minify --baseURL https://tochtli.lapinel-fam.club/
+      - hugo --minify --cleanDestinationDir --baseURL https://tochtli.lapinel-fam.club/
       - echo $AWS_PROFILE
       - aws s3 sync public/ s3://lapinel-home-server-backup/tochtli-site/ --delete --profile $AWS_PROFILE
       - |
